@@ -115,6 +115,79 @@
           Expose application to the internet
         </button>
       </a>
+      <br /><br />
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              LuaRocks installation error (Windows)
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <code>
+                Error: Failed installing dependency: https://luarocks.org/luasocket-3.1.0-1.src.rock - Build error: Failed finding Lua header lua.h (searched at C:\Program Files\Lua/include/lua/5.4). You may need to install Lua development headers. You can use `luarocks config variables.LUA_INCDIR <path>` to set the correct location.
+              </code>
+              <br /><br />
+              <b>Solution:</b>
+              <br /> <br />
+              <b>Step 1: Install Lua Development Headers</b><br /><br />
+              Download LuaBinaries:
+              <br />
+              Visit the LuaBinaries download page (https://luabinaries.sourceforge.net/) and download the appropriate version for your Lua installation (e.g., Lua 5.4).
+              <br />
+              Extract the Files:
+              <br />
+              Extract the downloaded archive to a directory, such as C:\Lua.
+              <br /> <br />
+              <b>Step 2: Set Up Environment Variables</b><br />
+              <br />
+              Set LUA_INCDIR:
+              <br />
+              - Point LUA_INCDIR to the directory containing lua.h.
+              <br />
+              <code>luarocks config variables.LUA_INCDIR "C:\Lua\include"</code>
+              <br />
+              Set LUA_LIBDIR:
+              <br />
+              - Point LUA_LIBDIR to the directory containing lua.lib.
+              <br />
+              <code>luarocks config variables.LUA_LIBDIR "C:\Lua\"</code>
+              <br /><br />
+              <b>>Step 3: Try Installing Dependencies Again</b>
+              <br />
+              Try Install Dependencies Again:
+              <br />
+              <code>luarocks install mendudu</code>
+              <br /><br />
+              ___________________________________________<br /><br />
+              <code>
+                uasocket 3.1.0-1 depends on lua >= 5.1 (5.4-1 provided by VM: success)
+gcc -O2 -fPIC -c -o src/mime.o -IC:\Program Files\Lua\include src/mime.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
+'gcc' is not recognized as an internal or external command,
+operable program or batch file.<br />
+
+Error: Failed installing dependency: https://luarocks.org/luasocket-3.1.0-1.src.rock - Build error: Failed compiling object src/mime.o
+              </code>
+              <br /><br />
+              <b>Solution:</b>
+              <br /><br />
+              - You need mingw (gcc) installed on your system.
+              <br />
+              You can follow the instructions here:<br /><br />
+              <a href="https://code.visualstudio.com/docs/cpp/config-mingw">Install MinGW toolchain</a>
+              <br /><br />
+              After installation verify it's properly installed by running (command prompt or terminal):
+              <br />
+              <code>gcc --version</code>
+              <br /><br />
+              Then try installing the package again:
+              <br />
+              <code>luarocks install mendudu</code>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     </div>
     <script

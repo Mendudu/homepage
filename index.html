@@ -201,6 +201,43 @@ Error: Failed installing dependency: https://luarocks.org/luasocket-3.1.0-1.src.
               Then try installing the package again:
               <br />
               <code>luarocks install mendudu</code>
+              <br /><br />
+              <br /><br />
+              <code>
+                luasocket 3.1.0-1 depends on lua >= 5.1 (5.4-1 provided by VM: success)
+gcc -O2 -fPIC -c -o src/luasocket.o -IC:\Program Files\Lua\include src/luasocket.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
+gcc -O2 -fPIC -c -o src/timeout.o -IC:\Program Files\Lua\include src/timeout.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
+gcc -O2 -fPIC -c -o src/buffer.o -IC:\Program Files\Lua\include src/buffer.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
+gcc -O2 -fPIC -c -o src/io.o -IC:\Program Files\Lua\include src/io.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
+gcc -O2 -fPIC -c -o src/auxiliar.o -IC:\Program Files\Lua\include src/auxiliar.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
+gcc -O2 -fPIC -c -o src/options.o -IC:\Program Files\Lua\include src/options.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
+src/options.c: In function 'opt_ip6_setmembership':
+src/options.c:406:10: warning: implicit declaration of function 'inet_pton' [-Wimplicit-function-declaration]
+     if (!inet_pton(AF_INET6, lua_tostring(L, -1), &val.ipv6mr_multiaddr))
+          ^~~~~~~~~
+gcc -O2 -fPIC -c -o src/inet.o -IC:\Program Files\Lua\include src/inet.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
+gcc -O2 -fPIC -c -o src/except.o -IC:\Program Files\Lua\include src/except.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
+gcc -O2 -fPIC -c -o src/select.o -IC:\Program Files\Lua\include src/select.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
+gcc -O2 -fPIC -c -o src/tcp.o -IC:\Program Files\Lua\include src/tcp.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
+gcc -O2 -fPIC -c -o src/udp.o -IC:\Program Files\Lua\include src/udp.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
+gcc -O2 -fPIC -c -o src/compat.o -IC:\Program Files\Lua\include src/compat.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
+gcc -O2 -fPIC -c -o src/wsocket.o -IC:\Program Files\Lua\include src/wsocket.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
+In file included from src/wsocket.h:11:0,
+                 from src/socket.h:18,
+                 from src/wsocket.c:12:
+src/wsocket.c: In function 'socket_gaistrerror':
+src/wsocket.c:419:14: error: 'ERROR_NOT_ENOUGH_MEMORY' undeclared (first use in this function)
+         case EAI_MEMORY: return PIE_MEMORY;
+              ^
+src/wsocket.c:419:14: note: each undeclared identifier is reported only once for each function it appears in
+
+Error: Build error: Failed compiling object src/wsocket.o
+              </code>
+              <br /><br />
+              <b>Solution:</b>
+              <code>luarocks install luasocket OPENSSL_INCDIR=C:\MinGW\include OPENSSL_LIBDIR=C:\MinGW\lib</code>
+              <br /><br />
+              Run above command and set your mingw include and lib directory.
             </div>
           </div>
         </div>

@@ -179,7 +179,7 @@
               <br /><br />
               ___________________________________________<br /><br />
               <code>
-                uasocket 3.1.0-1 depends on lua >= 5.1 (5.4-1 provided by VM: success)
+                luasocket 3.1.0-1 depends on lua >= 5.1 (5.4-1 provided by VM: success)
 gcc -O2 -fPIC -c -o src/mime.o -IC:\Program Files\Lua\include src/mime.c -DLUASOCKET_DEBUG -DWINVER=0x0501 -Ic:\windows\system32\include
 'gcc' is not recognized as an internal or external command,
 operable program or batch file.<br />
@@ -252,6 +252,50 @@ Error: Build error: Failed compiling object src/wsocket.o
               <code>luarocks install luasocket OPENSSL_INCDIR=C:\MinGW\include OPENSSL_LIBDIR=C:\MinGW\lib</code>
               <br /><br />
               Run above command and set your mingw include and lib directory.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              module 'mendudu' not found
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              If you get this error you need to set the LUA_PATH and LUA_CPATH environment variables.
+              <br /><br />
+              <b>Example (add on top of require):</b>
+              <br />
+              <code>
+                -- Add the LuaRocks paths<br />
+local luarocks_path = "C:\\LuaRocks\\share\\lua\\5.4\\?.lua;C:\\LuaRocks\\share\\lua\\5.4\\?\\init.lua"<br />
+local luarocks_cpath = "C:\\LuaRocks\\lib\\lua\\5.4\\?.dll"<br /><br />
+
+package.path = package.path .. ";" .. luarocks_path<br />
+package.cpath = package.cpath .. ";" .. luarocks_cpath<br /><br />
+
+local mendudu = require("mendudu")
+              </code>
+              <br /><br />
+              Lets say you create a new folder C:\LuaRocks
+              <br /><br />
+              You can choose LuaRocks folder in C:\Users\[your username]\.luarocks\config-5.4.lua
+              <br /><br />
+              Edit the file and add the following lines:
+              <br /><br />
+              <code>
+               rocks_trees = {<br />
+                   { name = [[user]], root = [[C:\LuaRocks]] }<br />
+               }
+              </code>
+              <br /><br />
+              This means all luarocks packages will be installed in C:\LuaRocks. (and in this case Mendulu, luasocket and dkjson)
+              <br /><br />
+              I noticed myself that path variables that include Swedish characters like "åäö" can cause issues.
+              <br />
+              Therefore I recommend to use only English characters in your path variables and installation path.
+
             </div>
           </div>
         </div>
